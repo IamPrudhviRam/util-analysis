@@ -1,7 +1,5 @@
 Deep neural network to extract intelligent information from invoice documents.
 
-**TL;DR**
-
 * An easy to use UI to view PDF/JPG/PNG invoices and extract information.
 * Train custom models using the Trainer UI on your own dataset.
 * Add or remove invoice fields as per your convenience.
