@@ -1,7 +1,3 @@
-![InvoiceNet Logo](_images/logo.png)
-
---------------------------------------------------------------------------------
-
 Deep neural network to extract intelligent information from invoice documents.
 
 **TL;DR**
@@ -11,16 +7,6 @@ Deep neural network to extract intelligent information from invoice documents.
 * Add or remove invoice fields as per your convenience.
 * Save the extracted information into your system with the click of a button.
 
-:star: We appreciate your star, it helps!
-
-The InvoiceNet logo was designed by [Sidhant Tibrewal](https://www.linkedin.com/in/sidhant-tibrewal-864058148/).
-[Check out](https://www.behance.net/tiber_sid) his work for some more beautiful designs.
-
----
-
-![InvoiceNet](_images/invoicenet.png)
-
----
 
 **DISCLAIMER**: 
 
@@ -29,9 +15,6 @@ The training GUI and data preparation scripts have been made available.
 
 Invoice documents contain sensitive information because of which collecting a sizable dataset has proven to be difficult.
 This makes it difficult for developers like us to train large-scale generalised models and make them available to the community.
-
-If you have a dataset of invoice documents that you are comfortable sharing with us, please reach out (<sarthakmittal2608@gmail.com>).
-We have the tools to create the first publicly-available large-scale invoice dataset along with a software platform for structured information extraction.
 
 ---
 
@@ -92,8 +75,8 @@ The training data must be arranged in a single directory. The invoice documents 
 train_data/
     invoice1.pdf
     invoice1.json
-    nike-invoice.pdf
-    nike-invoice.json
+    invoice2.pdf
+    invoice2.json
     12345.pdf
     12345.json
     ...
@@ -102,9 +85,9 @@ train_data/
 The JSON labels should have the following format:
 ```
 {
- "vendor_name":"Nike",
- "invoice_date":"12-01-2017",
- "invoice_number":"R0007546449",
+ "customer_name":"Nike",
+ "bill_date":"12-01-2017",
+ "start_date":"R0007546449",
  "total_amount":"137.51",
  ... other fields
 }
@@ -131,13 +114,13 @@ Choose the appropriate field type for the field and add the line mentioned below
 FIELDS["total_amount"] = FIELD_TYPES["amount"]
 
 # For example, to add a field invoice_date
-FIELDS["invoice_date"] = FIELD_TYPES["date"]
+FIELDS["bill_date"] = FIELD_TYPES["date"]
 
 # For example, to add a field tax_id (which might be optional)
 FIELDS["tax_id"] = FIELD_TYPES["optional"]
 
 # For example, to add a field vendor_name
-FIELDS["vendor_name"] = FIELD_TYPES["general"]
+FIELDS["customer_name"] = FIELD_TYPES["general"]
 ```
 
 
@@ -203,7 +186,7 @@ python predict.py --field total_amount --invoice invoices/1.pdf
 For extracting information using the trained InvoiceNet model, you just need to place the PDF invoice documents in one directory in the following format:
 
 ```
-predict_data/
+test_data/
     invoice1.pdf
     invoice2.pdf
     ...
@@ -211,10 +194,10 @@ predict_data/
 
 Run InvoiceNet using the following command:
 ```bash
-python predict.py --field enter-field-here --data_dir predict_data/
+python predict.py --field enter-field-here --data_dir test_data/
 
 # For example, for field 'total_amount'
-python predict.py --field total_amount --data_dir predict_data/
+python predict.py --field total_amount --data_dir test_data/
 ```
 ---
 
