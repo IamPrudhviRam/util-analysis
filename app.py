@@ -49,7 +49,7 @@ def main():
     # _data_dir = request.form['data_dir']
     # _pred_dir = request.form['predicted_dir']
 
-    _field = '{"key1": "invoice_number", "key2": "vendor_name", "key3": "invoice_date", "key4": "tax_amount","key5": "total_amount"}'
+    _field = '{"key1": "customer_name", "key2": "bill_date", "key3": "start_date", "key4": "end_date","key5": "total_amount"}'
 
     dummy = []
     for index, item in enumerate(_file):
@@ -164,7 +164,7 @@ def main():
 
     os.makedirs(_pred_dir, exist_ok=True)
     for idx, filename in enumerate(paths):
-        filename = os.path.basename(str(idx))[:-3] + '.json'
+        filename = os.path.basename(str(idx))[:-3] + '1.json'
         labels = {}
         if os.path.exists(os.path.join(_pred_dir, filename)):
             with open(os.path.join(_pred_dir, filename), 'r') as fp:
@@ -183,12 +183,13 @@ def main():
     print("file type", type(_file))
     print("labelz", labels)
 
-    # print("date", predictions['invoice_date'])
-    dummy = [dateparser.parse(date, settings={'DATE_ORDER': 'MDY', 'PREFER_LOCALE_DATE_ORDER': False}) for date in predictions['invoice_date']]
-    to_string = [dateTime.strftime('%d-%m-%Y') for dateTime in dummy]
-    # print("date 1", predictions['invoice_date'], to_string)
-    predictions['invoice_date'] = to_string
-    # print("final date", predictions['invoice_date'])
+    # # print("date", predictions['invoice_date'])
+    # dummy = [dateparser.parse(date, settings={'DATE_ORDER': 'MDY', 'PREFER_LOCALE_DATE_ORDER': False}) for date in predictions['invoice_date']]
+    # to_string = [dateTime.strftime('%d-%m-%Y') for dateTime in dummy]
+    # # print("date 1", predictions['invoice_date'], to_string)
+    # predictions['invoice_date'] = to_string
+    # # print("final date", predictions['invoice_date'])
+
     print("Predictions stored in '{}'".format(_pred_dir))
     print("predictions", predictions)
     # return '<h2>Utility bills predicted, Check Predicted folder for results</h2><p>Predictions : \n{prediction}</p>'.format(prediction=predictions)
